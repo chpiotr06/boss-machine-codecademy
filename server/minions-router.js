@@ -2,6 +2,9 @@ const express = require('express');
 const minionsRouter = express.Router();
 const { getAllFromDatabase, getFromDatabaseById, addToDatabase, updateInstanceInDatabase, deleteFromDatabasebyId } = require('./db')
 
+const workRouter = require('./work-router');
+minionsRouter.use('/:minionId/work', workRouter);
+
 const haveUniqueId = (req, res, next) => {
   const { id } = req.body;
   const exists = getFromDatabaseById('minions', id)
